@@ -1,0 +1,23 @@
+{
+  "name": "serverless-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "dependencies": {
+    "aws-event-parser": "latest"
+  },
+  "devDependencies": {
+    "chai": "latest",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
+    "serverless": "^1.35.0",
+    "serverless-domain-manager": "^3.1.0",
+    "serverless-plugin-aws-cn-principal": "0.0.1",
+    "serverless-pseudo-parameters": "^2.4.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "luosky@gmail.com",
+  "license": "ISC"
+}

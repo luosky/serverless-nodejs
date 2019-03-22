@@ -1,0 +1,82 @@
+
+# Just uncomment any of them to get that config option.
+# For full config options, check the docs:
+#    docs.serverless.com
+#     https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/
+# Happy Coding!
+
+service: template
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: cn-north-1
+  endpointType: regional
+  memorySize: 128
+  timeout: 30
+  iamRoleStatements:
+#    - Effect: Allow
+#      Action:
+#      - dynamodb:GetItem
+#      - dynamodb:UpdateItem
+#      Resource: "arn:aws-cn:dynamodb:${opt:region, self:provider.region}:*:table/${self:custom.jlgl.tableName}"
+
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:PutObject"
+#        - "s3:ListBucket"
+#        - "s3:GetObject"
+#        - "s3:HeadObject"
+#      Resource:
+#        - "arn:aws-cn:s3:::${self:custom.jlgl.bucketName}/*"
+#        - "arn:aws-cn:s3:::${self:custom.jlgl.bucketName}" # 不加这个 headObject 会报错。。。
+
+
+functions:
+  index:
+    handler: src/index.handler
+    events: # https://serverless.com/framework/docs/providers/aws/events/apigateway/
+#      - sqs:
+#          arn: arn:aws-cn:sqs:${self:custom.region}:#{AWS::AccountId}:sqs-name
+#          batchSize: 1
+#      - s3:
+#          bucket: bucket-name
+#          event: s3:ObjectCreated:*
+      - http:
+          path: /
+          method: get
+      - http:
+          path: hello
+          method: get
+#          private: true
+#          cors:
+#            origin: '*'
+#            headers:
+#              - '*'
+#      - stream:
+#        arn: arn:aws-cn:kinesis:${self:custom.region}:#{AWS::AccountId}:stream/kinesis-stream-name
+#        batchSize: 10
+#        startingPosition: LATEST
+#        enabled: true
+#package:
+#  exclude:
+#    - data/**
+
+plugins:
+  - serverless-plugin-aws-cn-principal
+#  - serverless-export-env  # 在代码里引用 SSM 里指定的环境变量  https://github.com/arabold/serverless-export-env
+  - serverless-domain-manager
+  - serverless-pseudo-parameters
+
+custom:
+  jlgl: ${file(./config.js)}
+  stage: ${opt:stage, self:provider.stage}
+  region: ${opt:region, self:provider.region}
+  apiBasePath: # 主要是为了在 prod 环境省略掉环境名，但是配置文件里又没法做条件判断。。。
+    prod: ${self:service}
+    others: ${self:service}-${self:custom.stage}
+  customDomain:
+    domainName: 'yourdomain.com'
+    basePath: ${self:custom.apiBasePath.${self:custom.stage}, self:custom.apiBasePath.others}
+    stage: ${self:custom.stage}
+#    createRoute53Record: true
