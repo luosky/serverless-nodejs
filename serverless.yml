@@ -33,15 +33,23 @@ provider:
 
 
 functions:
-  index:
-    handler: src/index.handler
+  handler:
+    handler: src/handler
     events: # https://serverless.com/framework/docs/providers/aws/events/apigateway/
-#      - sqs:
-#          arn: arn:aws-cn:sqs:${self:custom.region}:#{AWS::AccountId}:sqs-name
-#          batchSize: 1
-#      - s3:
-#          bucket: bucket-name
-#          event: s3:ObjectCreated:*
+      - stream:
+        arn: arn:aws-cn:kinesis:${self:custom.region}:#{AWS::AccountId}:stream/kinesis-stream-name
+        batchSize: 10
+        startingPosition: LATEST
+        enabled: true
+      - sqs:
+          arn: arn:aws-cn:sqs:${self:custom.region}:#{AWS::AccountId}:sqs-name
+          batchSize: 1
+      - s3:
+          bucket: bucket-name
+          event: s3:ObjectCreated:*
+  index:
+    handler: src/index
+    events: # https://serverless.com/framework/docs/providers/aws/events/apigateway/
       - http:
           path: /
           method: get
@@ -53,11 +61,7 @@ functions:
 #            origin: '*'
 #            headers:
 #              - '*'
-#      - stream:
-#        arn: arn:aws-cn:kinesis:${self:custom.region}:#{AWS::AccountId}:stream/kinesis-stream-name
-#        batchSize: 10
-#        startingPosition: LATEST
-#        enabled: true
+
 #package:
 #  exclude:
 #    - data/**

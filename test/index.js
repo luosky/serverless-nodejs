@@ -1,6 +1,6 @@
 'use strict'
 const should = require('chai').should()
-const event = require('./fixtures/s3.json')
+const event = require('./fixtures/apigateway.json')
 
 
 describe('index.js', function() {
@@ -8,11 +8,17 @@ describe('index.js', function() {
 
     const index = require('../src/index')
 
-    describe('handler', function() {
-        it('should return with OK', async () => {
-            const response = await index.handler(event)
+    describe('index', function() {
+        it('should return with 200', async () => {
+            const response = await index(event)
             console.log(`[TEST] response : ${JSON.stringify(response)}`)
-            response.should.equal('OK')
+            response.statusCode.should.equal(200)
+        })
+
+        it('should return with 502 when no payload', async () => {
+            const response = await index()
+            console.log(`[TEST] response : ${JSON.stringify(response)}`)
+            response.statusCode.should.equal(502)
         })
     })
 })
