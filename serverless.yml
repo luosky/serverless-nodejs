@@ -35,7 +35,7 @@ provider:
 functions:
   handler:
     handler: src/handler
-    events: # https://serverless.com/framework/docs/providers/aws/events/apigateway/
+    events: # https://serverless.com/framework/docs/providers/aws/events/sqs/
       - stream:
         arn: arn:aws-cn:kinesis:${self:custom.region}:#{AWS::AccountId}:stream/kinesis-stream-name
         batchSize: 10
@@ -67,7 +67,7 @@ functions:
 #    - data/**
 
 plugins:
-  - serverless-plugin-aws-cn-principal
+  # - serverless-plugin-aws-cn-principal
 #  - serverless-export-env  # 在代码里引用 SSM 里指定的环境变量  https://github.com/arabold/serverless-export-env
   - serverless-domain-manager
   - serverless-pseudo-parameters
