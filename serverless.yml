@@ -47,6 +47,7 @@ functions:
       - s3:
           bucket: bucket-name
           event: s3:ObjectCreated:*
+          existing: true
   index:
     handler: src/index
     events: # https://serverless.com/framework/docs/providers/aws/events/apigateway/
