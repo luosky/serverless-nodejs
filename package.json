@@ -15,7 +15,7 @@
     "serverless-pseudo-parameters": "^2.4.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --recursive"
   },
   "author": "luosky@gmail.com",
   "license": "ISC"

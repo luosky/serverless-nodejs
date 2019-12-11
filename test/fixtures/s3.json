@@ -4,33 +4,34 @@
       "eventVersion": "2.0",
       "eventSource": "aws:s3",
       "awsRegion": "cn-northwest-1",
-      "eventTime": "1970-01-01T00:00:00.000Z",
-      "eventName": "ObjectCreated:Put",
+      "eventTime": "2018-09-18T09:05:54.831Z",
+      "eventName": "ObjectCreated:CompleteMultipartUpload",
       "userIdentity": {
-        "principalId": "EXAMPLE"
+        "principalId": "AWS:AIDAPYTXK7VNCXHFGLGLU"
       },
       "requestParameters": {
-        "sourceIPAddress": "127.0.0.1"
+        "sourceIPAddress": "52.82.204.39"
       },
       "responseElements": {
-        "x-amz-request-id": "EXAMPLE123456789",
-        "x-amz-id-2": "EXAMPLE123/5678abcdefghijklambdaisawesome/mnopqrstuvwxyzABCDEFGH"
+        "x-amz-request-id": "1F0446DF7D989DC8",
+        "x-amz-id-2": "MZ0C/M+wdPFHiYPzUew0mq5I+mR75HJfhEZa8I71w3W8fu2xFJZr5TloJNPKZsdpcjxfb96rViE="
       },
       "s3": {
         "s3SchemaVersion": "1.0",
-        "configurationId": "testConfigRule",
+        "configurationId": "0428e7f6-f6ca-4e53-be36-e83cd4d61506",
         "bucket": {
-          "name": "example-bucket",
+          "name": "cdn.jiliguala.com",
           "ownerIdentity": {
-            "principalId": "EXAMPLE"
+            "principalId": "AWS:001355132076"
           },
-          "arn": "arn:aws-cn:s3:::example-bucket"
+          "arn": "arn:aws:s3:::cdn.jiliguala.com"
         },
         "object": {
-          "key": "test/key",
-          "size": 1024,
-          "eTag": "0123456789abcdef0123456789abcdef",
-          "sequencer": "0A1B2C3D4E5F678901"
+          "key": "new_cocos/package/HAHAHA.zip",
+          "size": 24311300,
+          "eTag": "793a639640f88a73ae2872b1232811bd-2",
+          "versionId": "LQ2.Ps4TBYVyt9QCNnlTUYDnzvF1PIUd",
+          "sequencer": "005BA0BFEC58581F73"
         }
       }
     }
