@@ -10,7 +10,7 @@
     "chai": "latest",
     "mocha": "^5.2.0",
     "nyc": "latest",
-    "serverless": "^1.51.0",
+    "serverless": "^1.83.3",
     "serverless-domain-manager": "^3.1.0",
     "serverless-pseudo-parameters": "^2.4.0"
   },
